@@ -9,7 +9,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,7 +59,9 @@ fun MainScreen() {
     val currentQuestion = 0
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -79,5 +84,23 @@ fun MainScreen() {
             fontSize = 22.sp,
             textAlign = TextAlign.Center
         )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Button(
+            onClick = { },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("True")
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Button(
+            onClick = { },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("False")
+        }
     }
 }
