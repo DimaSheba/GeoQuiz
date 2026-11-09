@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -64,6 +66,7 @@ fun MainScreen() {
     var currentQuestion by remember { mutableIntStateOf(0) }
     var answered by remember { mutableStateOf(false) }
     var correctAnswers by remember { mutableIntStateOf(0) }
+    var showResult by remember { mutableStateOf(false) }
 
     val question = questions[currentQuestion]
     val isLastQuestion = currentQuestion == questions.lastIndex
@@ -74,6 +77,10 @@ fun MainScreen() {
 
             if (userAnswer == question.answer) {
                 correctAnswers++
+            }
+
+            if (isLastQuestion) {
+                showResult = true
             }
         }
     }
@@ -138,5 +145,30 @@ fun MainScreen() {
                 Text("Next")
             }
         }
+    }
+
+    if (showResult) {
+        AlertDialog(
+            onDismissRequest = {
+                showResult = false
+            },
+            title = {
+                Text("Результат теста")
+            },
+            text = {
+                Text(
+                    "Правильных ответов: $correctAnswers из ${questions.size}"
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showResult = false
+                    }
+                ) {
+                    Text("Закрыть")
+                }
+            }
+        )
     }
 }
