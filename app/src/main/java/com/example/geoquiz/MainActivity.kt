@@ -61,8 +61,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-    val currentQuestion = 0
-
+    var currentQuestion by remember { mutableIntStateOf(0) }
     var answered by remember { mutableStateOf(false) }
     var correctAnswers by remember { mutableIntStateOf(0) }
 
@@ -122,6 +121,20 @@ fun MainScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Неверно")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        if (answered) {
+            Button(
+                onClick = {
+                    currentQuestion++
+                    answered = false
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Next")
             }
         }
     }
