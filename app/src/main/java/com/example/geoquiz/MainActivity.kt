@@ -66,6 +66,7 @@ fun MainScreen() {
     var correctAnswers by remember { mutableIntStateOf(0) }
 
     val question = questions[currentQuestion]
+    val isLastQuestion = currentQuestion == questions.lastIndex
 
     fun checkAnswer(userAnswer: Boolean) {
         if (!answered) {
@@ -126,7 +127,7 @@ fun MainScreen() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        if (answered) {
+        if (answered && !isLastQuestion) {
             Button(
                 onClick = {
                     currentQuestion++
