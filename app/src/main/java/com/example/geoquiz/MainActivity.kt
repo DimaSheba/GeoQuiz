@@ -7,12 +7,16 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.geoquiz.ui.theme.GeoQuizTheme
 
@@ -20,6 +24,16 @@ data class QuizQuestion(
     val text: String,
     val answer: Boolean
 )
+
+val questions = listOf(
+    QuizQuestion("Столица Австралии — Канберра.", true),
+    QuizQuestion("Тихий океан больше Атлантического океана.", true),
+    QuizQuestion("Суэцкий канал соединяет Красное море и Индийский океан.", false),
+    QuizQuestion("Исток реки Нил находится в Египте.", false),
+    QuizQuestion("Река Амазонка — самая длинная река Америки.", true),
+    QuizQuestion("Озеро Байкал — самое древнее и глубокое пресноводное озеро в мире.", true)
+)
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,38 +47,14 @@ class MainActivity : ComponentActivity() {
                     MainScreen()
                 }
             }
-            val questions = listOf(
-                QuizQuestion(
-                    text = "Столица Австралии — Канберра.",
-                    answer = true
-                ),
-                QuizQuestion(
-                    text = "Тихий океан больше Атлантического океана.",
-                    answer = true
-                ),
-                QuizQuestion(
-                    text = "Суэцкий канал соединяет Красное море и Индийский океан.",
-                    answer = false
-                ),
-                QuizQuestion(
-                    text = "Исток реки Нил находится в Египте.",
-                    answer = false
-                ),
-                QuizQuestion(
-                    text = "Река Амазонка — самая длинная река Америки.",
-                    answer = true
-                ),
-                QuizQuestion(
-                    text = "Озеро Байкал — самое древнее и глубокое пресноводное озеро в мире.",
-                    answer = true
-                )
-            )
         }
     }
 }
 
 @Composable
 fun MainScreen() {
+    val currentQuestion = 0
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -73,6 +63,21 @@ fun MainScreen() {
         Text(
             text = "GeoQuiz",
             fontSize = 32.sp
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Вопрос ${currentQuestion + 1} из ${questions.size}",
+            fontSize = 18.sp
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = questions[currentQuestion].text,
+            fontSize = 22.sp,
+            textAlign = TextAlign.Center
         )
     }
 }
