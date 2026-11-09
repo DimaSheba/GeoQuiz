@@ -16,6 +16,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -58,6 +63,21 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val currentQuestion = 0
 
+    var answered by remember { mutableStateOf(false) }
+    var correctAnswers by remember { mutableIntStateOf(0) }
+
+    val question = questions[currentQuestion]
+
+    fun checkAnswer(userAnswer: Boolean) {
+        if (!answered) {
+            answered = true
+
+            if (userAnswer == question.answer) {
+                correctAnswers++
+            }
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -80,7 +100,7 @@ fun MainScreen() {
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = questions[currentQuestion].text,
+            text = question.text,
             fontSize = 22.sp,
             textAlign = TextAlign.Center
         )
@@ -88,7 +108,7 @@ fun MainScreen() {
         Spacer(modifier = Modifier.height(32.dp))
 
         Button(
-            onClick = { },
+            onClick = { checkAnswer(true) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("True")
@@ -97,7 +117,7 @@ fun MainScreen() {
         Spacer(modifier = Modifier.height(12.dp))
 
         Button(
-            onClick = { },
+            onClick = { checkAnswer(false) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("False")
