@@ -85,6 +85,13 @@ fun MainScreen() {
         }
     }
 
+    fun restartQuiz() {
+        currentQuestion = 0
+        answered = false
+        correctAnswers = 0
+        showResult = false
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -161,6 +168,15 @@ fun MainScreen() {
                 )
             },
             confirmButton = {
+                TextButton(
+                    onClick = {
+                        restartQuiz()
+                    }
+                ) {
+                    Text("Пройти заново")
+                }
+            },
+            dismissButton = {
                 TextButton(
                     onClick = {
                         showResult = false
