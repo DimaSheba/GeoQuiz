@@ -33,6 +33,32 @@ class MainActivity : ComponentActivity() {
                     MainScreen()
                 }
             }
+            val questions = listOf(
+                QuizQuestion(
+                    text = "Столица Австралии — Канберра.",
+                    answer = true
+                ),
+                QuizQuestion(
+                    text = "Тихий океан больше Атлантического океана.",
+                    answer = true
+                ),
+                QuizQuestion(
+                    text = "Суэцкий канал соединяет Красное море и Индийский океан.",
+                    answer = false
+                ),
+                QuizQuestion(
+                    text = "Исток реки Нил находится в Египте.",
+                    answer = false
+                ),
+                QuizQuestion(
+                    text = "Река Амазонка — самая длинная река Америки.",
+                    answer = true
+                ),
+                QuizQuestion(
+                    text = "Озеро Байкал — самое древнее и глубокое пресноводное озеро в мире.",
+                    answer = true
+                )
+            )
         }
     }
 }
