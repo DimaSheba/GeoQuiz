@@ -107,20 +107,22 @@ fun MainScreen() {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        Button(
-            onClick = { checkAnswer(true) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("True")
-        }
+        if (!answered) {
+            Button(
+                onClick = { checkAnswer(true) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Верно")
+            }
 
-        Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
-        Button(
-            onClick = { checkAnswer(false) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("False")
+            Button(
+                onClick = { checkAnswer(false) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Неверно")
+            }
         }
     }
 }
